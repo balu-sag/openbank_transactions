@@ -13,15 +13,14 @@ public class TransactionService implements ITransactionService {
 	@Autowired
 	private RestTemplate restTemplate;
 	
-
-
 	@Override
 	public Transactions getAll(String account) {
-		// TODO Auto-generated method stub
-		Transactions transactions = restTemplate.getForObject("https://apisandbox.openbankproject.com/obp/v1.2.1/banks/rbs/accounts/savings-kids-john/public/transactions"
+		
+		String endpoint = "https://apisandbox.openbankproject.com/obp/v1.2.1/banks/rbs/accounts/" + account +" /public/transactions";
+
+		Transactions transactions = restTemplate.getForObject(endpoint
 				, Transactions.class);
 
-		
 		return transactions;
 	}
 	

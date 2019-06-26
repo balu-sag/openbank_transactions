@@ -36,6 +36,7 @@ public class TransactionMapTests {
 	{
 		Transaction transaction = new Transaction();
 		
+		
 		transaction.setId("123");
 		
 		return transaction;
