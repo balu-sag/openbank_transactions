@@ -23,3 +23,9 @@ $ mvn test
 $ curl http://localhost:8080/accounts/savings-kids-john/transactions
 ```
 
+# Docker
+
+```sh
+$ docker build -t obp/transactions .
+$ docker run -p 8080:8080 obp/transactions
+```
