@@ -18,6 +18,7 @@ public class TransactionMapper extends PropertyMap<Transaction, BackBaseTransact
 		map(source.getDetails().getValue().getCurrency(), destination.getTransactionCurrency());
 		map(source.getDetails().getType(), destination.getTransactionType());
 		map(source.getDetails().getDescription(), destination.getDescription());
+		map(source.getOtherAccount().getMetadata().getImageUrl(), destination.getCounterPartyLogoPath());
 	}
 
 }

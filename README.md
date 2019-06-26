@@ -9,7 +9,12 @@
 
 # Installation
 ```sh
-$ mvn spring-boot:run
+$ cd mvn spring-boot:run
+```
+
+# Test
+```sh
+$ mvn test
 ```
 
 # Curl
