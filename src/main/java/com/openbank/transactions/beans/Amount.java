@@ -5,6 +5,16 @@ public class Amount {
 	private String currency;
 	private double amount;
 	
+	public Amount()
+	{
+		
+	}
+	
+	public Amount(String currency, double amount) {
+		this.currency = currency;
+		this.amount = amount;
+	}
+	
 	public String getCurrency() {
 		return currency;
 	}
