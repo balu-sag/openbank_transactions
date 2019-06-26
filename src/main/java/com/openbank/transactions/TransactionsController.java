@@ -35,5 +35,21 @@ public class TransactionsController {
         
     }
 	
+	@GetMapping(path="{accountName}/transactions/{transactionType}/amount", produces = "application/json")
+    public TotalAmount getAmount(@PathVariable String accountName, @PathVariable String transactionType)
+    {
+						
+		Transactions transactions = transactionService.getAll(accountName);
+		
+		double totalAmount = transactions.getTransactions()
+		.stream()
+		.filter(transaction -> transaction.getDetails().getType()==transactionType)
+		.map(transaction -> transaction.getDetails().getValue().getAmount())
+		.reduce(0d,Double::sum);
+        
+		return new TotalAmount(totalAmount);
+		
+    }
+	
 	 
 }
