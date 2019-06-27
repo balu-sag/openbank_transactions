@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.openbank.transactions.beans.Transactions;
 
 @RestController
-@RequestMapping(path = "/accounts")
+@RequestMapping(path = "/accounts/{accountName}/transactions")
 public class TransactionsController {
 	
 	@Autowired
@@ -22,7 +22,7 @@ public class TransactionsController {
 	@Autowired
 	private ModelMapper modelMapper;
 	
-	@GetMapping(path="{accountName}/transactions", produces = "application/json")
+	@GetMapping(path="", produces = "application/json")
     public List<BackBaseTransaction> getTransactions(@PathVariable String accountName)
     {
 				
@@ -35,7 +35,7 @@ public class TransactionsController {
         
     }
 	
-	@GetMapping(path="{accountName}/transactions/{transactionType}", produces = "application/json")
+	@GetMapping(path="{transactionType}", produces = "application/json")
     public List<BackBaseTransaction> getTransactionsOfType(@PathVariable String accountName, @PathVariable String transactionType)
     {
 				
@@ -49,7 +49,7 @@ public class TransactionsController {
         
     }
 	
-	@GetMapping(path="{accountName}/transactions/{transactionType}/amount", produces = "application/json")
+	@GetMapping(path="{transactionType}/amount", produces = "application/json")
     public TotalAmount getAmount(@PathVariable String accountName, @PathVariable String transactionType)
     {
 						
