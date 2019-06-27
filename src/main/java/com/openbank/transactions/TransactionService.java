@@ -13,12 +13,15 @@ public class TransactionService implements ITransactionService {
 	@Autowired
 	private RestTemplate restTemplate;
 	
+	@Autowired
+	private OpenBankProperties openBankProperties;
+	
 	@Override
 	public Transactions getAll(String account) {
 		
-		String endpoint = "https://apisandbox.openbankproject.com/obp/v1.2.1/banks/rbs/accounts/" + account +" /public/transactions";
-
-		Transactions transactions = restTemplate.getForObject(endpoint
+		String url = String.format("%s/obp/v1.2.1/banks/rbs/accounts/%s/public/transactions", openBankProperties.getHost(), account);
+		
+		Transactions transactions = restTemplate.getForObject(url
 				, Transactions.class);
 
 		return transactions;
