@@ -35,6 +35,20 @@ public class TransactionsController {
         
     }
 	
+	@GetMapping(path="{accountName}/transactions/{transactionType}", produces = "application/json")
+    public List<BackBaseTransaction> getTransactionsOfType(@PathVariable String accountName, @PathVariable String transactionType)
+    {
+				
+		Transactions transactions = transactionService.getAll(accountName);
+		
+		return transactions.getTransactions()
+		.stream()
+		.filter(transaction -> transactionType.equalsIgnoreCase(transaction.getDetails().getType()))
+		.map(transaction -> modelMapper.map(transaction, BackBaseTransaction.class))
+		.collect(Collectors.toList());
+        
+    }
+	
 	@GetMapping(path="{accountName}/transactions/{transactionType}/amount", produces = "application/json")
     public TotalAmount getAmount(@PathVariable String accountName, @PathVariable String transactionType)
     {
@@ -43,7 +57,7 @@ public class TransactionsController {
 		
 		double totalAmount = transactions.getTransactions()
 		.stream()
-		.filter(transaction -> transaction.getDetails().getType()==transactionType)
+		.filter(transaction -> transactionType.equalsIgnoreCase(transaction.getDetails().getType()))
 		.map(transaction -> transaction.getDetails().getValue().getAmount())
 		.reduce(0d,Double::sum);
         
